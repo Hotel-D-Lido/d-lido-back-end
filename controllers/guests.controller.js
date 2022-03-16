@@ -1,0 +1,116 @@
+const bcrypt = require('bcrypt')
+const Guest = require('../models/guest.model')
+
+module.exports = class GuestsController {
+  async list (req, res, next) {
+    const list = await Guest.findAll()
+    res.send(list)
+  }
+
+  async get (req, res, next) {
+    const id = req.params.id
+    const publicUser = await Guest.findByPk(id)
+    res.send(publicUser)
+  }
+
+  async update (req, res, next) {
+    const id = req.params.id
+
+    const {
+      name,
+      last_name: lastName,
+      phone,
+      address,
+      country,
+      zip_code: zipCode,
+      birth_date: birthDate,
+      email,
+      password,
+      card_number: cardNumber,
+      card_type: cardType
+    } = req.body
+
+    // TODO: Agregar validaciones
+    if (!name) res.status(400).send({ message: 'Nombre es requerido' })
+
+    const salt = await bcrypt.genSalt()
+    const hash = await bcrypt.hash(password, salt)
+
+    const updateResult = await Guest.update(
+      {
+        name,
+        last_name: lastName,
+        phone,
+        address,
+        country,
+        zip_code: zipCode,
+        birth_date: birthDate,
+        email,
+        card_number: cardNumber,
+        card_type: cardType,
+        password: hash
+      },
+      {
+        where: {
+          guest_id: id
+        }
+      }
+    )
+
+    res.status(204).send(updateResult)
+  }
+
+  async create (req, res, next) {
+    const {
+      name,
+      last_name: lastName,
+      phone,
+      address,
+      country,
+      zip_code: zipCode,
+      birth_date: birthDate,
+      email,
+      password,
+      card_number: cardNumber,
+      card_type: cardType
+    } = req.body
+
+    // TODO: Agregar validaciones
+    if (!name) res.status(400).send({ message: 'Nombre es requerido' })
+
+    const salt = await bcrypt.genSalt()
+    const hash = await bcrypt.hash(password, salt)
+
+    const publicUser = await Guest.create({
+      name,
+      last_name: lastName,
+      phone,
+      address,
+      country,
+      zip_code: zipCode,
+      birth_date: birthDate,
+      email,
+      card_number: cardNumber,
+      card_type: cardType,
+      password: hash
+    })
+    res.status(201).send(publicUser)
+  }
+
+  async delete (req, res, next) {
+    const id = req.params.id
+
+    const destroyResult = await Guest.destroy({
+      where: {
+        guest_id: id
+      }
+    })
+
+    // TODO: Agregar validaciones.
+    if (destroyResult) {
+      return res.sendStatus(204)
+    }
+
+    res.status(500)
+  }
+}
