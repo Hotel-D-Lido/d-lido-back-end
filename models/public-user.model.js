@@ -1,9 +1,9 @@
-const Sequelize = require("sequelize");
-const Connection = require("./connection");
+const Sequelize = require('sequelize')
+const Connection = require('./connection')
 
-const connection = new Connection();
+const connection = new Connection()
 const PublicUser = connection.sequelize.define(
-  "PublicUser",
+  'PublicUser',
   {
     cliente_id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
     nombre: Sequelize.STRING,
@@ -14,12 +14,12 @@ const PublicUser = connection.sequelize.define(
     correo: Sequelize.STRING,
     numero_telefono: Sequelize.INTEGER,
     nombre_usuario: Sequelize.STRING,
-    password: Sequelize.STRING,
+    password: Sequelize.STRING
   },
   {
-    tableName: "usuario_publico",
-    timestamps: false,
+    tableName: 'usuario_publico',
+    timestamps: false
   }
-);
+)
 
-module.exports = PublicUser;
+module.exports = PublicUser

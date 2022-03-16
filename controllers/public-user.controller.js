@@ -1,20 +1,20 @@
-const bcrypt = require("bcrypt");
-const PublicUser = require("../models/public-user.model");
+const bcrypt = require('bcrypt')
+const PublicUser = require('../models/public-user.model')
 
 module.exports = class PublicUserController {
-  async list(req, res, next) {
-    const list = await PublicUser.findAll();
-    res.send(list);
+  async list (req, res, next) {
+    const list = await PublicUser.findAll()
+    res.send(list)
   }
 
-  async get(req, res, next) {
-    const id = req.params.id;
-    const publicUser = await PublicUser.findByPk(id);
-    res.send(publicUser);
+  async get (req, res, next) {
+    const id = req.params.id
+    const publicUser = await PublicUser.findByPk(id)
+    res.send(publicUser)
   }
 
-  async update(req, res, next) {
-    const id = req.params.id;
+  async update (req, res, next) {
+    const id = req.params.id
 
     const {
       nombre,
@@ -25,14 +25,14 @@ module.exports = class PublicUserController {
       correo,
       numero_telefono,
       nombre_usuario,
-      password,
-    } = req.body;
+      password
+    } = req.body
 
     // TODO: Agregar validaciones
-    if (!nombre) res.status(400).send({ message: "Nombre es requerido" });
+    if (!nombre) res.status(400).send({ message: 'Nombre es requerido' })
 
-    const salt = await bcrypt.genSalt();
-    const hash = await bcrypt.hash(password, salt);
+    const salt = await bcrypt.genSalt()
+    const hash = await bcrypt.hash(password, salt)
 
     const updateResult = await PublicUser.update(
       {
@@ -44,19 +44,19 @@ module.exports = class PublicUserController {
         correo,
         numero_telefono,
         nombre_usuario,
-        password: hash,
+        password: hash
       },
       {
         where: {
-          cliente_id: id,
-        },
+          cliente_id: id
+        }
       }
-    );
+    )
 
-    res.status(204).send(updateResult);
+    res.status(204).send(updateResult)
   }
 
-  async create(req, res, next) {
+  async create (req, res, next) {
     const {
       nombre,
       apellido_razon_social,
@@ -66,14 +66,14 @@ module.exports = class PublicUserController {
       correo,
       numero_telefono,
       nombre_usuario,
-      password,
-    } = req.body;
+      password
+    } = req.body
 
     // TODO: Agregar validaciones
-    if (!nombre) res.status(400).send({ message: "Nombre es requerido" });
+    if (!nombre) res.status(400).send({ message: 'Nombre es requerido' })
 
-    const salt = await bcrypt.genSalt();
-    const hash = await bcrypt.hash(password, salt);
+    const salt = await bcrypt.genSalt()
+    const hash = await bcrypt.hash(password, salt)
 
     const publicUser = await PublicUser.create({
       nombre,
@@ -84,25 +84,25 @@ module.exports = class PublicUserController {
       correo,
       numero_telefono,
       nombre_usuario,
-      password: hash,
-    });
-    res.status(201).send(publicUser);
+      password: hash
+    })
+    res.status(201).send(publicUser)
   }
 
-  async delete(req, res, next) {
-    const id = req.params.id;
+  async delete (req, res, next) {
+    const id = req.params.id
 
     const destroyResult = await PublicUser.destroy({
       where: {
-        cliente_id: id,
-      },
-    });
+        cliente_id: id
+      }
+    })
 
     // TODO: Agregar validaciones.
     if (destroyResult) {
-      return res.sendStatus(204);
+      return res.sendStatus(204)
     }
 
-    res.status(500);
+    res.status(500)
   }
-};
+}

@@ -1,19 +1,17 @@
-const express = require('express');
-const app = express();
+const express = require('express')
+const app = express()
 const PORT = process.env.PORT || 3000
 
-const employeeRoutes = require('./routes/employee.route');
-const publicUserRoutes = require('./routes/public-user.routes');
+const publicUserRoutes = require('./routes/public-user.routes')
 
-app.use(express.json());
+app.use(express.json())
 
 app.get('/', (req, res) => {
-    res.send('Hola, Mundo!');
-});
+  res.send('Up and running')
+})
 
-app.use('/employees', employeeRoutes);
-app.use('/users', publicUserRoutes);
+app.use('/users', publicUserRoutes)
 
 app.listen(PORT, () => {
-    console.log(`Server listening on port ${PORT}`);
+  console.log(`Server listening on port ${PORT}`)
 })
