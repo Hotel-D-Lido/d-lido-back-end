@@ -76,25 +76,33 @@ module.exports = class GuestsController {
     } = req.body
 
     // TODO: Agregar validaciones
-    if (!name) res.status(400).send({ message: 'Nombre es requerido' })
+    if (!name) return res.status(400).send({ message: 'Nombre es requerido' })
 
-    const salt = await bcrypt.genSalt()
-    const hash = await bcrypt.hash(password, salt)
+    try {
+      const salt = await bcrypt.genSalt()
+      const hash = await bcrypt.hash(password, salt)
 
-    const publicUser = await Guest.create({
-      name,
-      last_name: lastName,
-      phone,
-      address,
-      country,
-      zip_code: zipCode,
-      birth_date: birthDate,
-      email,
-      card_number: cardNumber,
-      card_type: cardType,
-      password: hash
-    })
-    res.status(201).send(publicUser)
+      const publicUser = await Guest.create({
+        name,
+        last_name: lastName,
+        phone,
+        address,
+        country,
+        zip_code: zipCode,
+        birth_date: birthDate,
+        email,
+        card_number: cardNumber,
+        card_type: cardType,
+        password: hash
+      })
+      res.status(201).send(publicUser)
+    } catch (error) {
+      if (error.name === 'SequelizeUniqueConstraintError') {
+        res.status(400).send({ message: 'Ya esxiste un usuario con este correo electrónico' })
+      } else if (error.name === 'SequelizeDatabaseError') {
+        res.status(400).send({ message: 'Tipo de identificación debe ser: Cédula, Pasaporte o Cédula RUC' })
+      }
+    }
   }
 
   async delete (req, res, next) {
