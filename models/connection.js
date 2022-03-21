@@ -15,21 +15,29 @@ module.exports = class Connection {
       throw new Error('Missing DB_USER')
     }
 
-    if (!process.env.DB_PASSWORD) {
-      throw new Error('Missing DB_PASSWORD')
+    // if (!process.env.DB_PASSWORD) {
+    //   throw new Error("Missing DB_PASSWORD");
+    // }
+
+    if (typeof Connection.instance === 'object') {
+      return Connection.instance
     }
 
-    if (typeof Connection.instance === 'object') { return Connection.instance }
+    this.sequelize = new Sequelize(
+      process.env.DB_NAME,
+      process.env.DB_USER,
+      process.env.DB_PASSWORD,
+      {
+        host: process.env.DB_HOST,
+        dialect: 'mysql',
+        sync: true
+      }
+    )
 
-    this.sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
-      host: process.env.DB_HOST,
-      dialect: 'mysql',
-      sync: true
-    })
-
-    this.sequelize.authenticate()
+    this.sequelize
+      .authenticate()
       .then(() => console.log('Database connected'))
-      .catch(error => console.error(error))
+      .catch((error) => console.error(error))
 
     Connection.instance = this
     return this
