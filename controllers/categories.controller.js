@@ -1,6 +1,6 @@
 const Category = require('../models/category.model')
 
-module.exports = class CategoriesController {
+module.exports = class categoriesController {
   async list (req, res, next) {
     const list = await Category.findAll()
     res.send(list)

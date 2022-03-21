@@ -4,6 +4,7 @@ const app = express()
 const PORT = process.env.PORT || 3000
 
 const guestsRoutes = require('./routes/guests.routes')
+const roomsRoutes = require('./routes/rooms.routes')
 const categoriesRoutes = require('./routes/categories.routes')
 
 app.use(
@@ -19,6 +20,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/guests', guestsRoutes)
+app.use('/rooms', roomsRoutes)
 app.use('/categories', categoriesRoutes)
 
 app.listen(PORT, () => {
