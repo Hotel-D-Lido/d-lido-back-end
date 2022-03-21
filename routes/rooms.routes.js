@@ -4,15 +4,15 @@ const router = express.Router()
 const RoomsController = require('../controllers/rooms.controller')
 const roomsController = new RoomsController()
 
-/* Get employees list */
+/* Get rooms list */
 router.get('/', roomsController.list)
-/* Get employee by id */
+/* Get room by id */
 router.get('/:id', roomsController.get)
-/* Update employee */
+/* Update room */
 router.put('/update/:id', roomsController.update)
-/* Create employee */
+/* Create room */
 router.post('/create', roomsController.create)
-/* Delete employee */
+/* Delete room */
 router.delete('/delete/:id', roomsController.delete)
 
 module.exports = router

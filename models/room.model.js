@@ -3,7 +3,7 @@ const Connection = require('./connection')
 const categorie = require('../models/categorie.model')
 
 const connection = new Connection()
-const Rooms = connection.sequelize.define(
+const Room = connection.sequelize.define(
   'Room',
   {
     room_id: {
@@ -24,6 +24,6 @@ const Rooms = connection.sequelize.define(
   }
 )
 // iria lo que es la fk de una tabla a otra
-Rooms.hasOne(categorie)
+Room.hasOne(categorie)
 
-module.exports = Rooms
+module.exports = Room

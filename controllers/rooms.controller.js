@@ -1,22 +1,21 @@
-const rooms = require('../models/room.model')
-const room = require('../models/room.model')
+const Room = require('../models/room.model')
 
 module.exports = class RoomsController {
   async list (req, res, next) {
-    const list = await room.findAll()
+    const list = await Room.findAll()
     res.send(list)
   }
 
   async get (req, res, next) {
     const id = req.params.id
-    const publicUser = await room.findByPk(id)
+    const publicUser = await Room.findByPk(id)
     res.send(publicUser)
   }
 
   async update (req, res, next) {
     const id = req.params.id
     const { name, description, status, category_id: categoryId } = req.body
-    const updateResult = await rooms.update(
+    const updateResult = await Room.update(
       {
         name,
         description,
@@ -34,7 +33,7 @@ module.exports = class RoomsController {
 
   async create (req, res, next) {
     const { name, description, status, category_id: categoryId } = req.body
-    const room = await rooms.create({
+    const room = await Room.create({
       name,
       description,
       status,
@@ -46,7 +45,7 @@ module.exports = class RoomsController {
   async delete (req, res, next) {
     const id = req.params.id
 
-    const destroyResult = await rooms.destroy({
+    const destroyResult = await Room.destroy({
       where: {
         room_id: id
       }
