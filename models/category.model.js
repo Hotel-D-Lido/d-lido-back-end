@@ -2,8 +2,8 @@ const Sequelize = require('sequelize')
 const Connection = require('./connection')
 
 const connection = new Connection()
-const categories = connection.sequelize.define(
-  'categories',
+const Category = connection.sequelize.define(
+  'Category',
   {
     category_id: {
       type: Sequelize.INTEGER,
@@ -14,8 +14,6 @@ const categories = connection.sequelize.define(
     guest_total: Sequelize.INTEGER,
     price: Sequelize.DECIMAL
   },
-  // aqui no entendi por que hicistes eso?
-
   {
     tableName: 'categories',
     timestamps: true,
@@ -23,5 +21,5 @@ const categories = connection.sequelize.define(
     updatedAt: 'updated_at'
   }
 )
-console.log(categories)
-module.exports = categories
+
+module.exports = Category

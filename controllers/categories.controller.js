@@ -1,24 +1,24 @@
-const categories = require('../models/categorie.model')
+const Category = require('../models/category.model')
 
 module.exports = class CategoriesController {
   async list (req, res, next) {
-    const list = await categories.findAll()
+    const list = await Category.findAll()
     res.send(list)
   }
 
   async get (req, res, next) {
     const id = req.params.id
-    const publicUser = await categories.findByPk(id)
+    const publicUser = await Category.findByPk(id)
     res.send(publicUser)
   }
 
   async update (req, res, next) {
     const id = req.params.id
-    const { name, guest_total, price } = req.body
-    const updateResult = await categories.update(
+    const { name, guest_total: guestTotal, price } = req.body
+    const updateResult = await Category.update(
       {
         name,
-        guest_total,
+        guest_total: guestTotal,
         price
       },
       {
@@ -31,10 +31,10 @@ module.exports = class CategoriesController {
   }
 
   async create (req, res, next) {
-    const { name, guest_total, price } = req.body
-    const publicUser = await categories.create({
+    const { name, guest_total: guestTotal, price } = req.body
+    const publicUser = await Category.create({
       name,
-      guest_total,
+      guest_total: guestTotal,
       price
     })
     res.status(201).send(publicUser)
@@ -43,7 +43,7 @@ module.exports = class CategoriesController {
   async delete (req, res, next) {
     const id = req.params.id
 
-    const destroyResult = await categories.destroy({
+    const destroyResult = await Category.destroy({
       where: {
         category_id: id
       }
