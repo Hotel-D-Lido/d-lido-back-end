@@ -8,8 +8,8 @@ module.exports = class CategoriesController {
 
   async get (req, res, next) {
     const id = req.params.id
-    const publicUser = await Category.findByPk(id)
-    res.send(publicUser)
+    const category = await Category.findByPk(id)
+    res.send(category)
   }
 
   async update (req, res, next) {
@@ -32,12 +32,12 @@ module.exports = class CategoriesController {
 
   async create (req, res, next) {
     const { name, guest_total: guestTotal, price } = req.body
-    const publicUser = await Category.create({
+    const category = await Category.create({
       name,
       guest_total: guestTotal,
       price
     })
-    res.status(201).send(publicUser)
+    res.status(201).send(category)
   }
 
   async delete (req, res, next) {

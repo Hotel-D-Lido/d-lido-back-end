@@ -9,8 +9,8 @@ module.exports = class GuestsController {
 
   async get (req, res, next) {
     const id = req.params.id
-    const publicUser = await Guest.findByPk(id)
-    res.send(publicUser)
+    const guest = await Guest.findByPk(id)
+    res.send(guest)
   }
 
   async update (req, res, next) {
@@ -82,7 +82,7 @@ module.exports = class GuestsController {
       const salt = await bcrypt.genSalt()
       const hash = await bcrypt.hash(password, salt)
 
-      const publicUser = await Guest.create({
+      const guest = await Guest.create({
         name,
         last_name: lastName,
         phone,
@@ -95,7 +95,7 @@ module.exports = class GuestsController {
         card_type: cardType,
         password: hash
       })
-      res.status(201).send(publicUser)
+      res.status(201).send(guest)
     } catch (error) {
       if (error.name === 'SequelizeUniqueConstraintError') {
         res.status(400).send({ message: 'Ya esxiste un usuario con este correo electrónico' })
