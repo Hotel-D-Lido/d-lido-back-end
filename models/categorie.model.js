@@ -23,5 +23,5 @@ const categories = connection.sequelize.define(
     updatedAt: 'updated_at'
   }
 )
-console.log(categories)
+
 module.exports = categories

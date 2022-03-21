@@ -5,6 +5,7 @@ const PORT = process.env.PORT || 3000
 
 const guestsRoutes = require('./routes/guests.routes')
 const categoriesRoutes = require('./routes/category.routes')
+const roomsRoutes = require('./routes/rooms.routes')
 
 app.use(
   cors({
@@ -20,6 +21,8 @@ app.get('/', (req, res) => {
 
 app.use('/guests', guestsRoutes)
 app.use('/category', categoriesRoutes)
+app.use('/rooms', roomsRoutes)
+
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`)
 })

@@ -1,6 +1,6 @@
 const categories = require('../models/categorie.model')
 
-module.exports = class CategoriesController {
+module.exports = class categoriesController {
   async list (req, res, next) {
     const list = await categories.findAll()
     res.send(list)
@@ -8,8 +8,8 @@ module.exports = class CategoriesController {
 
   async get (req, res, next) {
     const id = req.params.id
-    const publicUser = await categories.findByPk(id)
-    res.send(publicUser)
+    const categorie = await categories.findByPk(id)
+    res.send(categorie)
   }
 
   async update (req, res, next) {
@@ -32,12 +32,12 @@ module.exports = class CategoriesController {
 
   async create (req, res, next) {
     const { name, guest_total, price } = req.body
-    const publicUser = await categories.create({
+    const categorie = await categories.create({
       name,
       guest_total,
       price
     })
-    res.status(201).send(publicUser)
+    res.status(201).send(categorie)
   }
 
   async delete (req, res, next) {
