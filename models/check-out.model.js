@@ -10,7 +10,7 @@ const CheckOut = connection.sequelize.define(
       primaryKey: true,
       autoIncrement: true
     },
-    booking_id: Sequelize.STRING,
+    booking_id: Sequelize.INTEGER,
     check_out_date: Sequelize.DATE
   },
   {

@@ -10,7 +10,7 @@ const CheckIn = connection.sequelize.define(
       primaryKey: true,
       autoIncrement: true
     },
-    booking_id: Sequelize.STRING,
+    booking_id: Sequelize.INTEGER,
     check_in_date: Sequelize.DATE
   },
   {
