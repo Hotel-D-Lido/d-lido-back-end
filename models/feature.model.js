@@ -1,29 +1,24 @@
 const Sequelize = require('sequelize')
 const Connection = require('./connection')
-const Category = require('../models/category.model')
 
 const connection = new Connection()
-const Room = connection.sequelize.define(
-  'Room',
+const Feature = connection.sequelize.define(
+  'Feature',
   {
-    room_id: {
+    feature_id: {
       type: Sequelize.INTEGER,
       primaryKey: true,
       autoIncrement: true
     },
     name: Sequelize.STRING,
-    description: Sequelize.STRING,
-    status: Sequelize.STRING,
-    category_id: Sequelize.INTEGER
+    description: Sequelize.STRING
   },
   {
-    tableName: 'rooms',
+    tableName: 'features',
     timestamps: true,
     createdAt: 'created_at',
     updatedAt: 'updated_at'
   }
 )
 
-Room.hasOne(Category)
-
-module.exports = Room
+module.exports = Feature
