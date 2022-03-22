@@ -15,9 +15,9 @@ module.exports = class Connection {
       throw new Error('Missing DB_USER')
     }
 
-    // if (!process.env.DB_PASSWORD) {
-    //   throw new Error("Missing DB_PASSWORD");
-    // }
+    if (!process.env.DB_PASSWORD) {
+      throw new Error('Missing DB_PASSWORD')
+    }
 
     if (typeof Connection.instance === 'object') {
       return Connection.instance

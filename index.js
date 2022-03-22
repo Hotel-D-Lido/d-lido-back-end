@@ -12,6 +12,7 @@ const equipmentsRoutes = require('./routes/equipments.routes')
 const checkInsRoutes = require('./routes/check-ins.routes')
 const checkOutsRoutes = require('./routes/check-outs.routes')
 const bookingsRoutes = require('./routes/bookings.routes')
+const authenticationRoutes = require('./routes/authentication.routes')
 
 app.use(
   cors({
@@ -34,6 +35,7 @@ app.use('/images', imagesRoutes)
 app.use('/equipments', equipmentsRoutes)
 app.use('/check-ins', checkInsRoutes)
 app.use('/check-outs', checkOutsRoutes)
+app.use('/authentication', authenticationRoutes)
 
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`)
