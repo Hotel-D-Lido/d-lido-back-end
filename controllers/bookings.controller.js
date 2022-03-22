@@ -14,9 +14,15 @@ module.exports = class BookingsController {
 
   async update (req, res, next) {
     const id = req.params.id
-    const { start_date: StartDate, end_date: EndDate, status } = req.body
+    const {
+      room_id: roomId,
+      guest_id: guestId,
+      start_date: StartDate, end_date: EndDate, status
+    } = req.body
     const updateResult = await Booking.update(
       {
+        room_id: roomId,
+        guest_id: guestId,
         start_date: StartDate,
         end_date: EndDate,
         status
@@ -33,11 +39,15 @@ module.exports = class BookingsController {
 
   async create (req, res, next) {
     const {
+      room_id: roomId,
+      guest_id: guestId,
       start_date: StartDate,
       end_date: EndDate,
       status
     } = req.body
     const booking = await Booking.create({
+      room_id: roomId,
+      guest_id: guestId,
       start_date: StartDate,
       end_date: EndDate,
       status
