@@ -1,14 +1,14 @@
-const images = require('../models/image.model')
+const Image = require('../models/image.model')
 
 module.exports = class ImagesController {
   async list (req, res, next) {
-    const list = await images.findAll()
+    const list = await Image.findAll()
     res.send(list)
   }
 
   async get (req, res, next) {
     const id = req.params.id
-    const image = await images.findByPk(id)
+    const image = await Image.findByPk(id)
     res.send(image)
   }
 
@@ -17,7 +17,7 @@ module.exports = class ImagesController {
     const {
       content
     } = req.body
-    const updateResult = await images.update(
+    const updateResult = await Image.update(
       {
         content
       }, {
@@ -31,7 +31,7 @@ module.exports = class ImagesController {
 
   async create (req, res, next) {
     const { content } = req.body
-    const image = await images.create({
+    const image = await Image.create({
       content
     })
     res.status(201).send(image)
@@ -40,7 +40,7 @@ module.exports = class ImagesController {
   async delete (req, res, next) {
     const id = req.params.id
 
-    const destroyResult = await images.destroy({
+    const destroyResult = await Image.destroy({
       where: {
         category_id: id
       }

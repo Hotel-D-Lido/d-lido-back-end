@@ -2,8 +2,8 @@ const Sequelize = require('sequelize')
 const Connection = require('./connection')
 
 const connection = new Connection()
-const Images = connection.sequelize.define(
-  'Images',
+const Image = connection.sequelize.define(
+  'Image',
   {
     images_id: {
       type: Sequelize.INTEGER,
@@ -21,4 +21,4 @@ const Images = connection.sequelize.define(
   }
 )
 
-module.exports = Images
+module.exports = Image
