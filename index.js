@@ -7,6 +7,7 @@ const guestsRoutes = require('./routes/guests.routes')
 const roomsRoutes = require('./routes/rooms.routes')
 const categoriesRoutes = require('./routes/categories.routes')
 const bookingsRoutes = require('./routes/bookings.routes')
+const imagesRoutes = require('./models/image.model')
 
 app.use(
   cors({
@@ -24,6 +25,8 @@ app.use('/guests', guestsRoutes)
 app.use('/rooms', roomsRoutes)
 app.use('/categories', categoriesRoutes)
 app.use('/bookings', bookingsRoutes)
+app.use('/images', imagesRoutes)
+
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`)
 })
