@@ -17,16 +17,18 @@ module.exports = class BookingsController {
     const {
       room_id: roomId,
       guest_id: guestId,
-      start_date: StartDate, end_date: EndDate, status
+      start_date: startDate,
+      end_date: endDate,
+      status
     } = req.body
+
     const updateResult = await Booking.update(
       {
         room_id: roomId,
         guest_id: guestId,
-        start_date: StartDate,
-        end_date: EndDate,
+        start_date: startDate,
+        end_date: endDate,
         status
-
       },
       {
         where: {
@@ -34,6 +36,7 @@ module.exports = class BookingsController {
         }
       }
     )
+
     res.status(204).send(updateResult)
   }
 
@@ -41,17 +44,16 @@ module.exports = class BookingsController {
     const {
       room_id: roomId,
       guest_id: guestId,
-      start_date: StartDate,
-      end_date: EndDate,
+      start_date: startDate,
+      end_date: endDate,
       status
     } = req.body
     const booking = await Booking.create({
       room_id: roomId,
       guest_id: guestId,
-      start_date: StartDate,
-      end_date: EndDate,
+      start_date: startDate,
+      end_date: endDate,
       status
-
     })
     res.status(201).send(booking)
   }
