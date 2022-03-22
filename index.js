@@ -6,6 +6,7 @@ const PORT = process.env.PORT || 3000
 const guestsRoutes = require('./routes/guests.routes')
 const roomsRoutes = require('./routes/rooms.routes')
 const categoriesRoutes = require('./routes/categories.routes')
+const bookingsRoutes = require('./routes/bookings.routes')
 const imagesRoutes = require('./models/image.model')
 
 app.use(
@@ -23,6 +24,7 @@ app.get('/', (req, res) => {
 app.use('/guests', guestsRoutes)
 app.use('/rooms', roomsRoutes)
 app.use('/categories', categoriesRoutes)
+app.use('/bookings', bookingsRoutes)
 app.use('/images', imagesRoutes)
 
 app.listen(PORT, () => {
