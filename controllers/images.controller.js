@@ -6,6 +6,16 @@ module.exports = class ImagesController {
     res.send(list)
   }
 
+  async listByRoom (req, res, next) {
+    const roomId = req.params.room_id
+    const list = await Image.findAll({
+      where: {
+        room_id: roomId
+      }
+    })
+    res.send(list)
+  }
+
   async get (req, res, next) {
     const id = req.params.id
     const image = await Image.findByPk(id)
@@ -15,11 +25,13 @@ module.exports = class ImagesController {
   async update (req, res, next) {
     const id = req.params.id
     const {
-      content
+      content,
+      room_id: roomId
     } = req.body
     const updateResult = await Image.update(
       {
-        content
+        content,
+        room_id: roomId
       }, {
         where: {
           image_id: id
@@ -30,9 +42,10 @@ module.exports = class ImagesController {
   }
 
   async create (req, res, next) {
-    const { content } = req.body
+    const { content, room_id: roomId } = req.body
     const image = await Image.create({
-      content
+      content,
+      room_id: roomId
     })
     res.status(201).send(image)
   }

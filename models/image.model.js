@@ -5,11 +5,12 @@ const connection = new Connection()
 const Image = connection.sequelize.define(
   'Image',
   {
-    images_id: {
+    image_id: {
       type: Sequelize.INTEGER,
       primaryKey: true,
       autoIncrement: true
     },
+    room_id: Sequelize.INTEGER,
     content: Sequelize.STRING
   },
 

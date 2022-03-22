@@ -6,6 +6,8 @@ const imagesController = new ImagesController()
 
 /* Get images list */
 router.get('/', imagesController.list)
+/* Get images list by room id */
+router.get('/by-room/:room_id', imagesController.listByRoom)
 /* Get image by id */
 router.get('/:id', imagesController.get)
 /* Update image */
