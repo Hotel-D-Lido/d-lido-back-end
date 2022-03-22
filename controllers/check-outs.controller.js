@@ -1,15 +1,14 @@
-const bcrypt = require('bcrypt')
-const Check_out = require('../models/checkouts.model')
+const CheckOut = require('../models/check-out.model')
 
-module.exports = class Check_outssController {
+module.exports = class CheckOutsController {
   async list (req, res, next) {
-    const list = await Check_out.findAll()
+    const list = await CheckOut.findAll()
     res.send(list)
   }
 
   async get (req, res, next) {
     const id = req.params.id
-    const publicUser = await Check_out.findByPk(id)
+    const publicUser = await CheckOut.findByPk(id)
     res.send(publicUser)
   }
 
@@ -17,16 +16,16 @@ module.exports = class Check_outssController {
     const id = req.params.id
 
     const {
-      booking_id,
-      check_out_date
+      booking_id: bookingId,
+      check_out_date: checkOutDate
     } = req.body
 
     // TODO: Agregar validaciones
 
-    const updateResult = await Check_out.update(
+    const updateResult = await CheckOut.update(
       {
-        booking_id,
-        check_out_date
+        booking_id: bookingId,
+        check_out_date: checkOutDate
       },
       {
         where: {
@@ -40,16 +39,16 @@ module.exports = class Check_outssController {
 
   async create (req, res, next) {
     const {
-      booking_id,
-      check_out_date
+      booking_id: bookingId,
+      check_out_date: checkOutDate
     } = req.body
 
     // TODO: Agregar validaciones
 
     try {
-      const publicUser = await Check_out.create({
-        booking_id,
-        check_out_date
+      const publicUser = await CheckOut.create({
+        booking_id: bookingId,
+        check_out_date: checkOutDate
       })
       res.status(201).send(publicUser)
     } catch (error) {
@@ -60,7 +59,7 @@ module.exports = class Check_outssController {
   async delete (req, res, next) {
     const id = req.params.id
 
-    const destroyResult = await Check_out.destroy({
+    const destroyResult = await CheckOut.destroy({
       where: {
         guestcheck_out_id: id
       }

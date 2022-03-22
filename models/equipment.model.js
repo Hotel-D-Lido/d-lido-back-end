@@ -1,7 +1,5 @@
 const Sequelize = require('sequelize')
 const Connection = require('./connection')
-const { hasOne } = require('./room.model')
-const { hasOne } = require('./feature.model')
 
 const connection = new Connection()
 const Equipment = connection.sequelize.define(
@@ -13,7 +11,7 @@ const Equipment = connection.sequelize.define(
       autoIncrement: true
     },
     room_id: Sequelize.STRING,
-    feature: Sequelize.STRING
+    feature_id: Sequelize.STRING
   },
   {
     tableName: 'equipment',
@@ -22,6 +20,5 @@ const Equipment = connection.sequelize.define(
     updatedAt: 'updated_at'
   }
 )
-Equipment.hasOne(Rooms)
-Equipment.hasOne(Feature)
+
 module.exports = Equipment

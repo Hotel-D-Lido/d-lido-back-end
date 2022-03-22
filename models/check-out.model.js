@@ -2,24 +2,23 @@ const Sequelize = require('sequelize')
 const Connection = require('./connection')
 
 const connection = new Connection()
-const Checkins = connection.sequelize.define(
-  'Checkins',
+const CheckOut = connection.sequelize.define(
+  'CheckOut',
   {
-    check_in_id: {
+    check_out_id: {
       type: Sequelize.INTEGER,
       primaryKey: true,
       autoIncrement: true
     },
     booking_id: Sequelize.STRING,
-    check_in_date: Sequelize.DATE
-
+    check_out_date: Sequelize.DATE
   },
   {
-    tableName: 'check_ins',
+    tableName: 'check_outs',
     timestamps: true,
     createdAt: 'created_at',
     updatedAt: 'updated_at'
   }
 )
-Checkins.hasOne(booking)
-module.exports = Checkins
+
+module.exports = CheckOut

@@ -1,4 +1,3 @@
-const bcrypt = require('bcrypt')
 const Equipment = require('../models/equipment.model')
 
 module.exports = class EquipmentsController {
@@ -17,17 +16,16 @@ module.exports = class EquipmentsController {
     const id = req.params.id
 
     const {
-      room_id,
-      feature_id
+      room_id: roomId,
+      feature_id: featureId
     } = req.body
 
     // TODO: Agregar validaciones
-    if (!name) res.status(400).send({ message: 'Nombre es requerido' })
 
     const updateResult = await Equipment.update(
       {
-        room_id,
-        feature_id
+        room_id: roomId,
+        feature_id: featureId
       },
       {
         where: {
@@ -41,17 +39,16 @@ module.exports = class EquipmentsController {
 
   async create (req, res, next) {
     const {
-      room_id,
-      feature_id
+      room_id: roomId,
+      feature_id: featureId
     } = req.body
 
     // TODO: Agregar validaciones
-    if (!name) return res.status(400).send({ message: 'Nombre es requerido' })
 
     try {
       const publicUser = await Equipment.create({
-        room_id,
-        feature_id
+        room_id: roomId,
+        feature_id: featureId
       })
       res.status(201).send(publicUser)
     } catch (error) {

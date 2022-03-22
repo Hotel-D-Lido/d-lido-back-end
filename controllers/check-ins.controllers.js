@@ -1,15 +1,14 @@
-const bcrypt = require('bcrypt')
-const Checkins = require('../models/chek_ins.model')
+const CheckIn = require('../models/check-in.model')
 
-module.exports = class Check_inssController {
+module.exports = class CheckInsController {
   async list (req, res, next) {
-    const list = await Checkins.findAll()
+    const list = await CheckIn.findAll()
     res.send(list)
   }
 
   async get (req, res, next) {
     const id = req.params.id
-    const publicUser = await Checkins.findByPk(id)
+    const publicUser = await CheckIn.findByPk(id)
     res.send(publicUser)
   }
 
@@ -17,16 +16,16 @@ module.exports = class Check_inssController {
     const id = req.params.id
 
     const {
-      booking_id,
-      check_in_date
+      booking_id: bookingId,
+      check_in_date: checkInDate
     } = req.body
 
     // TODO: Agregar validaciones
 
-    const updateResult = await Checkins.update(
+    const updateResult = await CheckIn.update(
       {
-        booking_id,
-        check_in_date
+        booking_id: bookingId,
+        check_in_date: checkInDate
       },
       {
         where: {
@@ -40,16 +39,16 @@ module.exports = class Check_inssController {
 
   async create (req, res, next) {
     const {
-      booking_id,
-      check_in_date
+      booking_id: bookingId,
+      check_in_date: checkInDate
     } = req.body
 
     // TODO: Agregar validaciones
 
     try {
-      const publicUser = await Checkins.create({
-        booking_id,
-        check_in_date
+      const publicUser = await CheckIn.create({
+        booking_id: bookingId,
+        check_in_date: checkInDate
       })
       res.status(201).send(publicUser)
     } catch (error) {
@@ -60,7 +59,7 @@ module.exports = class Check_inssController {
   async delete (req, res, next) {
     const id = req.params.id
 
-    const destroyResult = await Checkins.destroy({
+    const destroyResult = await CheckIn.destroy({
       where: {
         check_in_id: id
       }

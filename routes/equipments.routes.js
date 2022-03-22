@@ -1,18 +1,18 @@
 const express = require('express')
 const router = express.Router()
 
-const EquipmentsController = require('../controllers/guests.controller')
+const EquipmentsController = require('../controllers/equipments.controller')
 const equipmentsController = new EquipmentsController()
 
-/* Get employees list */
+/* Get equipments list */
 router.get('/', equipmentsController.list)
-/* Get employee by id */
+/* Get equipment by id */
 router.get('/:id', equipmentsController.get)
-/* Update employee */
+/* Update equipment */
 router.put('/update/:id', equipmentsController.update)
-/* Create employee */
+/* Create equipment */
 router.post('/create', equipmentsController.create)
-/* Delete employee */
+/* Delete equipment */
 router.delete('/delete/:id', equipmentsController.delete)
 
 module.exports = router
