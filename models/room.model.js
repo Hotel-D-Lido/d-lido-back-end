@@ -1,6 +1,5 @@
 const Sequelize = require('sequelize')
 const Connection = require('./connection')
-const Category = require('../models/category.model')
 
 const connection = new Connection()
 const Room = connection.sequelize.define(
@@ -23,7 +22,5 @@ const Room = connection.sequelize.define(
     updatedAt: 'updated_at'
   }
 )
-
-Room.hasOne(Category)
 
 module.exports = Room
