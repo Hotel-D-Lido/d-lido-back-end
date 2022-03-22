@@ -1,14 +1,14 @@
-const feature = require('../models/feature.model')
+const Feature = require('../models/feature.model')
 
 module.exports = class FeaturesController {
   async list (req, res, next) {
-    const list = await feature.findAll()
+    const list = await Feature.findAll()
     res.send(list)
   }
 
   async get (req, res, next) {
     const id = req.params.id
-    const publicUser = await feature.findByPk(id)
+    const publicUser = await Feature.findByPk(id)
     res.send(publicUser)
   }
 
@@ -23,7 +23,7 @@ module.exports = class FeaturesController {
     // TODO: Agregar validaciones
     if (!name) res.status(400).send({ message: 'Nombre es requerido' })
 
-    const updateResult = await feature.update(
+    const updateResult = await Feature.update(
       {
         name,
         description: description
@@ -48,7 +48,7 @@ module.exports = class FeaturesController {
     if (!name) return res.status(400).send({ message: 'Nombre es requerido' })
 
     try {
-      const publicUser = await feature.create({
+      const publicUser = await Feature.create({
         name,
         description: description
       })
@@ -61,7 +61,7 @@ module.exports = class FeaturesController {
   async delete (req, res, next) {
     const id = req.params.id
 
-    const destroyResult = await feature.destroy({
+    const destroyResult = await Feature.destroy({
       where: {
         feature_id: id
       }

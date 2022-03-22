@@ -6,13 +6,13 @@ const featuresController = new FeaturesController()
 
 /* Get features list */
 router.get('/', featuresController.list)
-/* Get features by id */
+/* Get feature by id */
 router.get('/:id', featuresController.get)
-/* Update features */
+/* Update feature */
 router.put('/update/:id', featuresController.update)
-/* Create features */
+/* Create feature */
 router.post('/create', featuresController.create)
-/* Delete features */
+/* Delete feature */
 router.delete('/delete/:id', featuresController.delete)
 
 module.exports = router

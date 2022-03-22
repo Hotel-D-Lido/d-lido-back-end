@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize')
 const Connection = require('./connection')
-const categorie = require('../models/categorie.model')
+const Category = require('../models/category.model')
 
 const connection = new Connection()
 const Room = connection.sequelize.define(
@@ -23,7 +23,7 @@ const Room = connection.sequelize.define(
     updatedAt: 'updated_at'
   }
 )
-// iria lo que es la fk de una tabla a otra
-Room.hasOne(categorie)
+
+Room.hasOne(Category)
 
 module.exports = Room
