@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize')
 const Connection = require('./connection')
-const categorie = require('../models/categorie.model')
+const categorie = require('../models/category.model')
 
 const connection = new Connection()
 const Room = connection.sequelize.define(

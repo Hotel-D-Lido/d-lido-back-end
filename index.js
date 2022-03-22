@@ -10,6 +10,7 @@ const imagesRoutes = require('./routes/images.routes')
 const equipmentsRoutes = require('./routes/equipments.routes')
 const checkInsRoutes = require('./routes/check-ins.routes')
 const checkOutsRoutes = require('./routes/check-outs.routes')
+const bookingsRoutes = require('./routes/bookings.routes')
 
 app.use(
   cors({
@@ -26,6 +27,7 @@ app.get('/', (req, res) => {
 app.use('/guests', guestsRoutes)
 app.use('/rooms', roomsRoutes)
 app.use('/categories', categoriesRoutes)
+app.use('/bookings', bookingsRoutes)
 app.use('/images', imagesRoutes)
 app.use('/equipments', equipmentsRoutes)
 app.use('/check-ins', checkInsRoutes)
