@@ -4,13 +4,13 @@ const imagesController = require('../controllers/images.controller')
 
 /* Get images list */
 router.get('/', imagesController.list)
-/* Get images by id */
+/* Get image by id */
 router.get('/:id', imagesController.get)
-/* Update images */
+/* Update image */
 router.put('/update/:id', imagesController.update)
-/* Create images */
+/* Create image */
 router.post('/create', imagesController.create)
-/* Delete images */
+/* Delete image */
 router.delete('/delete/:id', imagesController.delete)
 
 module.exports = router

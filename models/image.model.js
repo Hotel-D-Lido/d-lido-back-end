@@ -1,10 +1,9 @@
 const Sequelize = require('sequelize')
 const Connection = require('./connection')
-const Room = require('../models/room.model')
 
 const connection = new Connection()
-const images = connection.sequelize.define(
-  'images',
+const Images = connection.sequelize.define(
+  'Images',
   {
     images_id: {
       type: Sequelize.INTEGER,
@@ -21,5 +20,5 @@ const images = connection.sequelize.define(
     updatedAt: 'updated_at'
   }
 )
-images.hasOne(Room)
-module.exports = images
+
+module.exports = Images
