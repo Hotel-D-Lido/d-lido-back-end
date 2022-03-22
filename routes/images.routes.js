@@ -1,6 +1,8 @@
 const express = require('express')
 const router = express.Router()
-const imagesController = require('../controllers/images.controller')
+
+const ImagesController = require('../controllers/images.controller')
+const imagesController = new ImagesController()
 
 /* Get images list */
 router.get('/', imagesController.list)
