@@ -16,7 +16,8 @@ const authenticationRoutes = require('./routes/authentication.routes')
 
 app.use(
   cors({
-    origin: ['http://localhost:4000']
+    origin: ['http://localhost:4000'],
+    credentials: true
   })
 )
 

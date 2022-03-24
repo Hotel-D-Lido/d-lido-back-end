@@ -26,6 +26,28 @@ module.exports = class AuthenticationController {
       expiresIn: '24h'
     })
 
+    res.cookie('authtoken', token, { secure: true, expiresIn: 24 * 60 * 60 })
     res.status(200).send({ token })
+  }
+
+  async validate (req, res, next) {
+    const authorization = req.headers.authorization
+
+    if (!authorization) return res.status(401).send({ message: 'No autorizado' })
+
+    const [, token] = authorization.split('Bearer ')
+
+    try {
+      const valid = jwt.verify(token, process.env.JWT_SECRET)
+      if (valid) {
+        next()
+      } else {
+        res.status(401).send({ message: 'No autorizado' })
+      }
+    } catch (error) {
+      if (error.name === 'TokenExpiredError') {
+        res.status(401).send({ message: 'No autorizado' })
+      }
+    }
   }
 }
