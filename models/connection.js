@@ -29,15 +29,9 @@ module.exports = class Connection {
       process.env.DB_PASSWORD,
       {
         host: process.env.DB_HOST,
-        dialect: 'mysql',
-        sync: true
+        dialect: 'mysql'
       }
     )
-
-    this.sequelize
-      .authenticate()
-      .then(() => console.log('Database connected'))
-      .catch((error) => console.error(error))
 
     Connection.instance = this
     return this

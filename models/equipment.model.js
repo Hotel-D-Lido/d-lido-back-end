@@ -1,5 +1,7 @@
-const Sequelize = require('sequelize')
 const Connection = require('./connection')
+const Feature = require('./feature.model')
+const Room = require('./room.model')
+const Sequelize = require('sequelize')
 
 const connection = new Connection()
 const Equipment = connection.sequelize.define(
@@ -10,8 +12,20 @@ const Equipment = connection.sequelize.define(
       primaryKey: true,
       autoIncrement: true
     },
-    room_id: Sequelize.STRING,
-    feature_id: Sequelize.STRING
+    room_id: {
+      type: Sequelize.STRING,
+      references: {
+        model: Room,
+        key: 'room_id'
+      }
+    },
+    feature_id: {
+      type: Sequelize.STRING,
+      references: {
+        model: Feature,
+        key: 'feature_id'
+      }
+    }
   },
   {
     tableName: 'equipment',

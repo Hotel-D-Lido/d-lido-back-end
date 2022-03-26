@@ -1,8 +1,26 @@
+const Booking = require('../models/booking.model')
+const Category = require('../models/category.model')
+const Feature = require('../models/feature.model')
+const Image = require('../models/image.model')
 const Room = require('../models/room.model')
 
 module.exports = class RoomsController {
   async list (req, res, next) {
-    const list = await Room.findAll()
+    const list = await Room.findAll({
+      include: [{
+        model: Category,
+        as: 'category'
+      }, {
+        model: Image,
+        as: 'images'
+      }, {
+        model: Feature,
+        as: 'features'
+      }, {
+        model: Booking,
+        as: 'bookings'
+      }]
+    })
     res.send(list)
   }
 

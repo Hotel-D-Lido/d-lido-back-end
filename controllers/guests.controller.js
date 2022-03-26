@@ -1,9 +1,15 @@
 const bcrypt = require('bcrypt')
+const Booking = require('../models/booking.model')
 const Guest = require('../models/guest.model')
 
 module.exports = class GuestsController {
   async list (req, res, next) {
-    const list = await Guest.findAll()
+    const list = await Guest.findAll({
+      include: [{
+        model: Booking,
+        as: 'bookings'
+      }]
+    })
     res.send(list)
   }
 
